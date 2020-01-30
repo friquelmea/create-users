@@ -5,7 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,7 +36,7 @@ public class RegisterControllerTest {
 	@Test
 	public void agregarUsuariosTestOK() {
 		UserDTO user = new UserDTO("Francisco", "fco.talca@gmail.com", "elmenor", null);
-		Date now = new Date();
+		LocalDate now = LocalDate.now();
 		UserResponseDTO userResponse = new UserResponseDTO("UU345",now, now,now,"ASDOMG",true);
 		when(registerService.registerUser(any(), anyString())).thenReturn(userResponse);
 		when(response.getHeader(anyString())).thenReturn("OMR");

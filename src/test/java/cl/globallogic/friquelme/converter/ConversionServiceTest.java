@@ -30,12 +30,12 @@ public class ConversionServiceTest {
 	@Test(expected=ConversionFailedException.class)
 	public void agregarUsuariosMailInvalidoTestNOK() {
 		UserDTO jhon = new UserDTO("peter", "asdf@asdf", "adsfDD22", null);
-		User jhonUser = conversionService.convert(jhon, User.class);
+		conversionService.convert(jhon, User.class);
 	}
 	
 	@Test(expected=ConversionFailedException.class)
 	public void agregarUsuariosPassInvalidoTestNOK() {
 		UserDTO jhon = new UserDTO("peter", "asdf@asdf.cl", "asdf", null);
-		User jhonUser = conversionService.convert(jhon, User.class);
+		conversionService.convert(jhon, User.class);
 	}
 }

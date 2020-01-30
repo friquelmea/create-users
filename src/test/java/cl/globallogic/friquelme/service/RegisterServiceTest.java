@@ -5,6 +5,8 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import org.junit.Test;
@@ -40,8 +42,9 @@ public class RegisterServiceTest {
 	
 	@Test
 	public void agregarUsuariosTestOK() {
-		Date now = new Date();
-		User peterUser = new User("UIO","Peter","asdf@asdf.cl","adsf", now, now, now, "aJkdow",true);
+		LocalDate now = LocalDate.now();
+		Date dateNow = Date.from(now.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		User peterUser = new User("UIO","Peter","asdf@asdf.cl","adsf", dateNow, dateNow, dateNow, "aJkdow",true);
 		UserDTO peter = new UserDTO("peter", "asdf@asdf.cl", "adsf", null);
 		UserResponseDTO peterResponse = new UserResponseDTO("UIO", now, now, now, "aJkdow", true);
 		when(userDAO.getUserByEmail(anyString())).thenReturn(null);

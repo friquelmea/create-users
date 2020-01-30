@@ -1,5 +1,9 @@
 package cl.globallogic.friquelme.converter;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
@@ -16,10 +20,15 @@ public class UserToUserResponseDTOConverter implements Converter<User, UserRespo
 	@Override
 	public UserResponseDTO convert(User source) {
 		logger.info("UserToUserResponseDTOConverter::convert");
-		UserResponseDTO user = new UserResponseDTO(source.getId(), source.getCreated(), 
-				source.getModified(), source.getLastLogin(), source.getToken(), source.getIsActive());
+		UserResponseDTO user = new UserResponseDTO(source.getId(), convertDateToLocalDate(source.getCreated()), 
+				convertDateToLocalDate(source.getModified()), convertDateToLocalDate(source.getLastLogin()), 
+				source.getToken(), source.getIsActive());
 		
 		return user;
+	}
+	
+	private LocalDate convertDateToLocalDate(Date date) {
+		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 	}
 
 }
